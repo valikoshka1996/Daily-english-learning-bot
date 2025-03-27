@@ -1,6 +1,6 @@
 README.md:
 
-```
+
 # Word Filtering and Translation Tool
 
 This project is a Python-based tool for filtering words from a predefined list and performing translation operations.
@@ -34,7 +34,7 @@ This project is a Python-based tool for filtering words from a predefined list a
 
 ## License
 This project is licensed under the MIT License.
-```
+
 
 Would you like me to include specific examples of how the script works?
 
