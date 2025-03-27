@@ -1,6 +1,6 @@
 README.md:
 
-```markdown
+```
 # Word Filtering and Translation Tool
 
 This project is a Python-based tool for filtering words from a predefined list and performing translation operations.
