@@ -38,9 +38,9 @@ This project is licensed under the MIT License.
 
 Would you like me to include specific examples of how the script works?
 
-How to run vie Docker and Docker Compose:
+##How to run vie Docker and Docker Compose:
 
-## Installation and Running the Container
+### Installation and Running the Container
 
 ### 1. Requirements
 Before installation, make sure you have:
