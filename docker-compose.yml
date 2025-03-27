@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  translate-bot:
+    image: english-tg-01:latest		  # Використовуємо вже створений образ
+    env_file:
+      - .env
+    ports:
+      - "5233:5233"  # Проброс порту
+    restart: always
