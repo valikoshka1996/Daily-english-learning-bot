@@ -94,3 +94,126 @@ docker-compose down
 
 ## License
 This project is open-source and distributed under the MIT license.
+
+
+# API Endpoints Documentation
+
+This Flask-based application provides multiple endpoints for interacting with word translations and sending messages via Telegram. It uses `nltk` for word selection, Google Translate API for translations, and Telegram API for sending messages.
+
+## Endpoints
+
+### 1. `/webhook` [POST]
+This endpoint is used to trigger the sending of a set of random translated words to Telegram.
+
+#### Request:
+- Body: JSON payload (ignored by this endpoint).
+
+#### Response:
+- Status: `200 OK`.
+
+#### Description:
+This endpoint is a webhook that is triggered by a POST request. It invokes the `send_words()` function to get 5 translated words and sends them to a specified Telegram chat.
+
+### 2. `/translate` [POST]
+This endpoint allows translation of a given word from English to Ukrainian.
+
+#### Request:
+- Body: JSON object with the following structure:
+  ```json
+  {
+    "word": "example"
+  }
+  ```
+- `word`: A string representing the word you want to translate. It must be an English word present in the word list.
+
+#### Response:
+- Success (`200 OK`):
+  ```json
+  {
+    "word": "example",
+    "translation": "приклад"
+  }
+  ```
+- Error (`400 Bad Request`):
+  If the word is not valid or not in the word list:
+  ```json
+  {
+    "error": "Invalid word"
+  }
+  ```
+- Error (`500 Internal Server Error`):
+  If the translation failed:
+  ```json
+  {
+    "error": "Translation failed"
+  }
+  ```
+
+#### Description:
+This endpoint accepts a POST request with a word to translate. It checks if the word is valid and available in the word list. Then it sends the word for translation and returns the translated word in the response.
+
+### 3. `/getwords` [GET]
+This endpoint retrieves a list of all available English words in the word list.
+
+#### Request:
+- No body required.
+
+#### Response:
+- Success (`200 OK`):
+  ```json
+  ["word1", "word2", "word3", ...]
+  ```
+
+#### Description:
+This endpoint returns a list of all the words available in the `nltk` word list that can be used for translation.
+
+### 4. `/translated` [GET]
+This endpoint retrieves a list of all the words that have been successfully translated.
+
+#### Request:
+- No body required.
+
+#### Response:
+- Success (`200 OK`):
+  ```json
+  ["word1", "word2", "word3", ...]
+  ```
+
+#### Description:
+This endpoint returns a list of all the words that have been translated successfully. These words are stored in `translated_words`.
+
+---
+
+## Background Services
+
+### Daily Word Sending
+A background service runs every day at 15:00 to automatically send 5 random translated words to the Telegram chat. It operates by checking the current time and calling the `send_words()` function if the time is exactly 15:00.
+
+### Telegram Notifications
+When new words are translated, they are sent to a specified Telegram chat via the Telegram Bot API. You need to set the `TOKEN` and `CHAT_ID` environment variables to use the Telegram functionality.
+
+---
+
+## Environment Variables
+Ensure the following environment variables are set for the application to function:
+
+- `TOKEN`: The Telegram bot API token.
+- `CHAT_ID`: The ID of the Telegram chat to send the messages to.
+- `API_KEY`: The API key for MyMemory Translation API.
+
+---
+
+## Running the Application
+To run this application, make sure you have installed the required dependencies (`flask`, `nltk`, `googletrans`, `requests`).
+
+Run the Flask application:
+```bash
+python app.py
+```
+
+The application will start on `0.0.0.0:5233`, and you can interact with the endpoints using HTTP requests.
+
+---
+```
+
+This README.md provides detailed information on how to interact with the API endpoints, the background services, and required configurations.

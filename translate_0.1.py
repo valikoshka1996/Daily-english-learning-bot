@@ -108,6 +108,11 @@ def translate_word():
 def get_words():
     return jsonify(list(word_list)), 200
 
+@app.route('/translated', methods=['GET'])
+def get_translater():
+    return jsonify(list(translated_words)), 200
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5233)
 
