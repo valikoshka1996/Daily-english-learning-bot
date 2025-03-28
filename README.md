@@ -106,7 +106,12 @@ This Flask-based application provides multiple endpoints for interacting with wo
 This endpoint is used to trigger the sending of a set of random translated words to Telegram.
 
 #### Request:
-- Body: JSON payload (ignored by this endpoint).
+- Body: JSON object with the following structure:
+  ```json
+   {
+    "action": "translate"
+   }
+  ```
 
 #### Response:
 - Status: `200 OK`.
